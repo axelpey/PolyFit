@@ -28,15 +28,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../model/point_set_io.h"
 
 
-int main(int argc, char **argv)
-{
+int main(int argc, char** argv) {
     // initialize the logger (this is not optional)
     Logger::initialize();
 
+    // Take input_file and output_file from the command line
+    if (argc != 3) {
+        std::cerr << "Usage: " << argv[0] << " <input_file> <output_file>" << std::endl;
+        return EXIT_FAILURE;
+    }
+
     // input point cloud file name
-    const std::string input_file = std::string(POLYFIT_CODE_DIR) + "/../data/toy_data.bvg";
+    const std::string input_file = argv[1];
     // output mesh file name
-    const std::string output_file = std::string(POLYFIT_CODE_DIR) + "/../data/toy_data-result.obj";
+    const std::string output_file = argv[2];
 
     // below are the default parameters (change these when necessary)
     Method::lambda_data_fitting = 0.43;
